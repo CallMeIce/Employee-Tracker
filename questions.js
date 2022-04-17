@@ -9,7 +9,7 @@ function () {
             type: "list",
             name: "employeeTitle",
             message: "What would you like to do?",
-            choices: ["View All Employees", "Add Employee", "Update Employee Role", "Add Employee Role", "View All Roles", "View All Departments", "Add Department", "View All Employees", "Exit" ]
+            choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"]
         }
 
         ]).then((answer) => {
