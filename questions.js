@@ -7,12 +7,12 @@ function questionPrompts() {
     inquirer
         .prompt({
             type: "list",
-            name: "employeeTitle",
+            name: "choice",
             message: "What would you like to do?",
             choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"]
         }) 
-            .then((answer) => {
-                switch (expression) {
+            .then((data) => {
+                switch (data[choice]) {
                     case "View All Employees":
                       viewAllEmployees();
                       break;
@@ -31,7 +31,7 @@ function questionPrompts() {
                     case "View All Departments":
                      viewAllDepartments();
                       break;
-                    case "Add Department"
+                    case "Add Department":
                       addDepartment();
                       break;
                 }
@@ -60,4 +60,4 @@ function questionPrompts() {
 
 questionPrompts();
 
-module.exports = teamBuilder;
+module.exports = questionPrompts;
