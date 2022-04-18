@@ -14,35 +14,26 @@ function questionPrompts() {
             .then((answer) => {
                 switch (expression) {
                     case "View All Employees":
-                      //Statements executed when the
-                      //result of expression matches value1
-                      [break;]
+                      viewAllEmployees();
+                      break;
                     case "Add Employee":
-                      //Statements executed when the
-                      //result of expression matches value2
-                      [break;]
-                    
+                      addEmployee();
+                      break;
                     case "Update Employee Role":
-                      //Statements executed when the
-                      //result of expression matches valueN
-                      [break;]
-                    case "View All Roles"
-                      //Statements executed when none of
-                      //the values match the value of the expression
-                      [break;]
+                      updateEmployeeRole();
+                      break;
+                    case "View All Roles":
+                      viewAllRoles();
+                      break;
                     case "Add Role":
-                      //Statements executed when the
-                      //result of expression matches value2
-                      [break;]
-                    
+                      addRole();
+                      break;
                     case "View All Departments":
-                      //Statements executed when the
-                      //result of expression matches valueN
-                      [break;]
+                     viewAllDepartments();
+                      break;
                     case "Add Department"
-                      //Statements executed when none of
-                      //the values match the value of the expression
-                      [break;]
+                      addDepartment();
+                      break;
                 }
             })}
                 
