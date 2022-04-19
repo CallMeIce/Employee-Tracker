@@ -81,6 +81,13 @@ const addRole = () => {
     })
 }
 
+const viewAllRoles = () => {
+  connect.query('SELECT * FROM roles', (err, res) => {
+    if (err) throw (err)
+    console.table(res);
+    questionPrompts()
+})};
+
 
 const addEmployee = () => {
   inquirer
@@ -96,6 +103,13 @@ const addEmployee = () => {
       })
     })
 }
+
+const viewAllEmployees = () => {
+  connect.query('SELECT * FROM employee', (err, res) => {
+    if (err) throw (err)
+    console.table(res);
+    questionPrompts()
+})};
 
 const updateEmployeeRole = () => {
 
