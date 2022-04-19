@@ -12,8 +12,8 @@ function questionPrompts() {
       message: "What would you like to do?",
       choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"]
     })
-    .then((data) => {
-      switch (data) {
+    .then((answer) => {
+      switch (answer.choice) {
         case "View All Employees":
           viewAllEmployees();
           break;
@@ -42,11 +42,11 @@ function questionPrompts() {
 
 const addDepartment = () => {
   inquirer
-    .prompt({
-      type: 'text',
+    .prompt([{
+      type: 'input',
       name: 'departmentName',
       message: 'Enter the Department name you would like to add:'
-    }).then((answer) => {
+    }]).then((answer) => {
       connect.query('INSERT INTO department (dept_name) VALUES (?)', answer.departmentName, (err, res) => {
         if (err) throw (err)
         console.log(answer.departmentName);
