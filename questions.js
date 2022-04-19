@@ -55,6 +55,10 @@ const addDepartment = () => {
     })
 }
 
+const viewAllDepartments = () => {
+  
+}
+
 
 const addRole = () => {
   inquirer
