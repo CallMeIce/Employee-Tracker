@@ -63,7 +63,8 @@ const addRole = () => {
       name: 'roleName',
       message: 'Enter the Role name you would like to add:'
     }).then((answer) => {
-      connect.query('INSERT INTO roles (title, salary, department_id) VALUES (?)', answer.roleName, (err, res) => {
+      connect.query('INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)', [answer.roleName, answer.salary, answer.department_id], (err, res) => {
+        console.log(answer)
         if (err) throw (err)
         console.log(answer.roleName);
         questionPrompts();
@@ -79,7 +80,7 @@ const addEmployee = () => {
       name: 'employeeName',
       message: 'Enter the Employee name you would like to add:'
     }).then((answer) => {
-      connect.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)', answer.employeeName, (err, res) => {
+      connect.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', answer.employeeName, (err, res) => {
         if (err) throw (err)
         console.log(answer.employeeName);
         questionPrompts();
