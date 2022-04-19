@@ -3,6 +3,8 @@ const inquirer = require("inquirer");
 const mysql2 = require("mysql2")
 const express = ("express")
 const connect = require('./db/connection')
+const table = require('console.table');
+const { query } = require("./db/connection");
 
 function questionPrompts() {
   inquirer
@@ -56,8 +58,11 @@ const addDepartment = () => {
 }
 
 const viewAllDepartments = () => {
-  
-}
+  connect.query('SELECT * FROM department', (err, res) => {
+    if (err) throw (err)
+    console.table(res);
+    questionPrompts()
+})};
 
 
 const addRole = () => {
@@ -91,6 +96,32 @@ const addEmployee = () => {
       })
     })
 }
+
+const updateEmployeeRole = () => {
+
+};
+
+// app.put('/api/review/:id', (req, res) => {
+//   const sql = `UPDATE reviews SET review = ? WHERE id = ?`;
+//   const params = [req.body.review, req.params.id];
+
+//   db.query(sql, params, (err, result) => {
+//     if (err) {
+//       res.status(400).json({ error: err.message });
+//     } else if (!result.affectedRows) {
+//       res.json({
+//         message: 'Movie not found'
+//       });
+//     } else {
+//       res.json({
+//         message: 'success',
+//         data: req.body,
+//         changes: result.affectedRows
+//       });
+//     }
+//   });
+// });
+
 
 questionPrompts();
 
