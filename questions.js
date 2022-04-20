@@ -1,10 +1,8 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const mysql2 = require("mysql2")
-const express = ("express")
-const connect = require('./db/connection')
-const table = require('console.table');
-const { query } = require("./db/connection");
+const mysql2 = require("mysql2");
+const connect = require("./db/connection");
+const table = require("console.table");
 
 function questionPrompts() {
   inquirer
@@ -12,7 +10,15 @@ function questionPrompts() {
       type: "list",
       name: "choice",
       message: "What would you like to do?",
-      choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"]
+      choices: [
+        "View All Employees",
+        "Add Employee",
+        "Update Employee Role",
+        "View All Roles",
+        "Add Role",
+        "View All Departments",
+        "Add Department",
+      ],
     })
     .then((answer) => {
       switch (answer.choice) {
@@ -38,104 +44,123 @@ function questionPrompts() {
           addDepartment();
           break;
       }
-    })
+    });
 }
-
 
 const addDepartment = () => {
   inquirer
-    .prompt([{
-      type: 'input',
-      name: 'departmentName',
-      message: 'Enter the Department name you would like to add:'
-    }]).then((answer) => {
-      connect.query('INSERT INTO department (dept_name) VALUES (?)', answer.departmentName, (err, res) => {
-        if (err) throw (err)
-        console.log(answer.departmentName);
-        questionPrompts();
-      })
-    })
-}
+    .prompt([
+      {
+        type: "input",
+        name: "departmentName",
+        message: "Enter the Department name you would like to add:",
+      },
+    ])
+    .then((answer) => {
+      connect.query(
+        "INSERT INTO department (dept_name) VALUES (?)",
+        answer.departmentName,
+        (err, res) => {
+          if (err) throw err;
+          console.log(answer.departmentName);
+          questionPrompts();
+        }
+      );
+    });
+};
 
 const viewAllDepartments = () => {
-  connect.query('SELECT * FROM department', (err, res) => {
-    if (err) throw (err)
+  connect.query("SELECT * FROM department", (err, res) => {
+    if (err) throw err;
     console.table(res);
-    questionPrompts()
-})};
-
+    questionPrompts();
+  });
+};
 
 const addRole = () => {
   inquirer
-    .prompt({
-      type: 'text',
-      name: 'roleName',
-      message: 'Enter the Role name you would like to add:'
-    }).then((answer) => {
-      connect.query('INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)', [answer.roleName, answer.salary, answer.department_id], (err, res) => {
-        console.log(answer)
-        if (err) throw (err)
-        console.log(answer.roleName);
-        questionPrompts();
-      })
-    })
-}
+    .prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter the Role name you would like to add:",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "Enter the salary for this role:",
+      },
+      {
+        type: "input",
+        name: "department_id",
+        message: "Enter the department id you would like to add:",
+      }
+    ])
+    .then((answer) => {
+      connect.query(
+        "INSERT INTO roles (roles.title, roles.salary, roles.department_id) VALUES (?, ?, ?)",
+        [answer.title, answer.salary, answer.department_id],
+        (err, res) => {
+          console.log(answer);
+          if (err) throw err;
+          console.log(answer.title, answer.salary, answer.department_id);
+          questionPrompts();
+        }
+      );
+    });
+};
 
 const viewAllRoles = () => {
-  connect.query('SELECT * FROM roles', (err, res) => {
-    if (err) throw (err)
+  connect.query("SELECT * FROM employee", (err, res) => {
+    if (err) throw err;
     console.table(res);
-    questionPrompts()
-})};
-
+    questionPrompts();
+  });
+};
 
 const addEmployee = () => {
   inquirer
-    .prompt({
-      type: 'text',
-      name: 'employeeName',
-      message: 'Enter the Employee name you would like to add:'
-    }).then((answer) => {
-      connect.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', answer.employeeName, (err, res) => {
-        if (err) throw (err)
-        console.log(answer.employeeName);
-        questionPrompts();
-      })
-    })
-}
-
+    .prompt([
+      {
+        type: "input",
+        name: "title",
+        message: "Enter the Role name you would like to add:",
+      },
+      {
+        type: "input",
+        name: "salary",
+        message: "Enter the salary for this role:",
+      },
+      {
+        type: "input",
+        name: "department_id",
+        message: "Enter the department id you would like to add:",
+      }
+    ])
+    .then((answer) => {
+      connect.query(
+        "INSERT INTO roles (roles.title, roles.salary, roles.department_id) VALUES (?, ?, ?)",
+        [answer.title, answer.salary, answer.department_id],
+        (err, res) => {
+          console.log(answer);
+          if (err) throw err;
+          console.log(answer.title, answer.salary, answer.department_id);
+          questionPrompts();
+        }
+      );
+    });
+};
 const viewAllEmployees = () => {
-  connect.query('SELECT * FROM employee', (err, res) => {
-    if (err) throw (err)
+  connect.query("SELECT * FROM employee", (err, res) => {
+    if (err) throw err;
     console.table(res);
-    questionPrompts()
-})};
+    questionPrompts();
+  });
+};
 
 const updateEmployeeRole = () => {
 
 };
-
-// app.put('/api/review/:id', (req, res) => {
-//   const sql = `UPDATE reviews SET review = ? WHERE id = ?`;
-//   const params = [req.body.review, req.params.id];
-
-//   db.query(sql, params, (err, result) => {
-//     if (err) {
-//       res.status(400).json({ error: err.message });
-//     } else if (!result.affectedRows) {
-//       res.json({
-//         message: 'Movie not found'
-//       });
-//     } else {
-//       res.json({
-//         message: 'success',
-//         data: req.body,
-//         changes: result.affectedRows
-//       });
-//     }
-//   });
-// });
-
 
 questionPrompts();
 
