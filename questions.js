@@ -3,7 +3,6 @@ const inquirer = require("inquirer");
 const mysql2 = require("mysql2");
 const connect = require("./db/connection");
 const table = require("console.table");
-const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 function questionPrompts() {
   inquirer
@@ -165,20 +164,40 @@ const viewAllEmployees = () => {
 };
 
 const updateEmployeeRole = () => {
-  connection,query("SELECT * FROM employee WHERE id = ?",  (err, res) => {
-  if (err) throw err;
-})
-
-// SELECT 
-//     firstname, 
-//     lastname, 
-//     email
-// FROM
-//     employees
-// WHERE
-//     employeeNumber = 1056;
-
-
+  connect.query("SELECT * FROM employee", (err, res) => {
+    if (err) throw err;
+    const employeeName = res.map(e => ({
+      name: `${e.first_name} ${e.last_name}`, value: e.id
+    }))
+    connect.query("SELECT * FROM roles", (err, res) => {
+      if (err) throw err;
+      var roles = res.map(r => ({
+        name: `${r.title}`, value: r.id
+      }))
+      inquirer
+          .prompt([
+            {
+              type: "list",
+              name: "updateEmployee",
+              message: "Select the employee you'd like to update:",
+              choices: employeeName
+            },
+            {
+              type: "list",
+              name: "updateRole",
+              message: "Enter the role you would like to update:",
+              choices: roles
+            },
+          ])
+          .then(({ updateEmployee, updateRole }) => {
+            connect.query(`update employee SET role_id = ? WHERE id = ?`, [updateRole, updateEmployee], function (err, data) {
+              if (err) throw err;
+              console.log("role updated!");
+              questionPrompts();
+            })
+          })
+    })
+  })
 };
 
 questionPrompts();
