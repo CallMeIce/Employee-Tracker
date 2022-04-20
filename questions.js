@@ -156,7 +156,7 @@ const addEmployee = () => {
     });
 };
 const viewAllEmployees = () => {
-  connect.query("SELECT * FROM employee", (err, res) => {
+  connect.query("SELECT * FROM employee INNER JOIN roles on roles.id = employee.id INNER JOIN department on department.id = roles.id", (err, res) => {
     if (err) throw err;
     console.table(res);
     questionPrompts();
