@@ -111,7 +111,7 @@ const addRole = () => {
 };
 
 const viewAllRoles = () => {
-  connect.query("SELECT * FROM employee", (err, res) => {
+  connect.query("SELECT * FROM roles", (err, res) => {
     if (err) throw err;
     console.table(res);
     questionPrompts();
@@ -123,28 +123,33 @@ const addEmployee = () => {
     .prompt([
       {
         type: "input",
-        name: "title",
-        message: "Enter the Role name you would like to add:",
+        name: "first_name",
+        message: "Employee's first name:",
       },
       {
         type: "input",
-        name: "salary",
-        message: "Enter the salary for this role:",
+        name: "last_name",
+        message: "Employee's last name:",
       },
       {
         type: "input",
-        name: "department_id",
-        message: "Enter the department id you would like to add:",
+        name: "role_id",
+        message: "Employee's role id:",
+      },
+      {
+        type: "input",
+        name: "manager_id",
+        message: "Employee's manager id (if any):",
       }
     ])
     .then((answer) => {
       connect.query(
-        "INSERT INTO roles (roles.title, roles.salary, roles.department_id) VALUES (?, ?, ?)",
-        [answer.title, answer.salary, answer.department_id],
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+        [answer.first_name, answer.last_name, answer.role_id, answer.manager_id],
         (err, res) => {
           console.log(answer);
           if (err) throw err;
-          console.log(answer.title, answer.salary, answer.department_id);
+          console.log(answer.first_name, answer.last_name, answer.role_id, answer.manager_id);
           questionPrompts();
         }
       );
