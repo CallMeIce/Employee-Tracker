@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const mysql2 = require("mysql2");
 const connect = require("./db/connection");
 const table = require("console.table");
+const Connection = require("mysql2/typings/mysql/lib/Connection");
 
 function questionPrompts() {
   inquirer
@@ -164,6 +165,19 @@ const viewAllEmployees = () => {
 };
 
 const updateEmployeeRole = () => {
+  connection,query("SELECT * FROM employee WHERE id = ?",  (err, res) => {
+  if (err) throw err;
+})
+
+// SELECT 
+//     firstname, 
+//     lastname, 
+//     email
+// FROM
+//     employees
+// WHERE
+//     employeeNumber = 1056;
+
 
 };
 
