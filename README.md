@@ -26,6 +26,8 @@ Kyle - https://github.com/kgiunta
 
 Dom - https://github.com/dev-dominick
 
+Kaleb - https://github.com/kaleb1027
+
 Scott McAnally - Tutor
 
 ## License

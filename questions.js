@@ -156,7 +156,7 @@ const addEmployee = () => {
     });
 };
 const viewAllEmployees = () => {
-  connect.query("SELECT * FROM employee INNER JOIN roles on roles.id = employee.id INNER JOIN department on department.id = roles.id", (err, res) => {
+  connect.query("SELECT * FROM employee INNER JOIN roles on roles.id = employee.role_id INNER JOIN department on department.id = roles.department_id", (err, res) => {
     if (err) throw err;
     console.table(res);
     questionPrompts();
@@ -192,7 +192,6 @@ const updateEmployeeRole = () => {
           .then(({ updateEmployee, updateRole }) => {
             connect.query(`update employee SET role_id = ? WHERE id = ?`, [updateRole, updateEmployee], function (err, data) {
               if (err) throw err;
-              console.log("role updated!");
               questionPrompts();
             })
           })
