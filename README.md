@@ -16,9 +16,9 @@ Provide instructions and examples for use. Include screenshots as needed.
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+
+[alt = "Employee Tracker Gif ](./images/Employee-Tracker-gif.gif)
+
 
 ## Credits
 
@@ -58,7 +58,7 @@ SOFTWARE.
 
 Github Repo - https://github.com/CallMeIce/Employee-Tracker
 
-Video Walkthrough - 
+Video Walkthrough - https://drive.google.com/file/d/1215tqZ9MOVYk_CZG1G6Q0V80gxLGGijh/view
 
 ## Features
 
