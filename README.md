@@ -8,14 +8,9 @@ My motivation for this project was to help keep track of employees or add them o
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+See attached video for detailed instructions on how to use the program.
 
 ## Usage
-
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
 
 [alt = "Employee Tracker Gif ](./images/Employee-Tracker-gif.gif)
 
